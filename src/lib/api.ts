@@ -97,9 +97,10 @@ export const auth = {
 
   async login(email: string, password: string) {
     try {
-      const response = await fetch(`${API_URL}/auth/login?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`, {
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
       });
       return handleResponse<LoginResponse>(response);
     } catch (error) {
@@ -158,7 +159,7 @@ export const products = {
     return handleResponse<Product[]>(response);
   },
 
-  async create(product: Omit<Product, 'id' | 'created_at' | 'updated_at'>) {
+  async create(product: Omit<Product, 'id' | 'created_at' | 'updated_at' | 'created_by'>) {
     const response = await fetch(`${API_URL}/products`, {
       method: 'POST',
       headers: getAuthHeader(),
@@ -199,7 +200,6 @@ export const transactions = {
     product_id: string;
     quantity_change: number;
     type: 'IN' | 'OUT';
-    created_by: string;
   }) {
     const response = await fetch(`${API_URL}/transactions`, {
       method: 'POST',

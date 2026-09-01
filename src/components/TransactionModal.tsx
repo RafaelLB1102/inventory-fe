@@ -47,8 +47,7 @@ export default function TransactionModal({ isOpen, onClose, onTransactionComplet
       await api.transactions.create({
         product_id: product.id,
         quantity_change: quantityChange,
-        type,
-        created_by: user.id
+        type
       });
 
       // Actualizar el producto con la nueva cantidad

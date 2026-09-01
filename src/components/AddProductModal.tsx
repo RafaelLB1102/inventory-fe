@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { X } from 'lucide-react';
 import { api } from '../lib/api';
-import { useAuthStore } from '../store/authStore';
 
 interface AddProductModalProps {
   isOpen: boolean;
@@ -16,8 +15,6 @@ export default function AddProductModal({ isOpen, onClose, onProductAdded }: Add
   const [price, setPrice] = useState('0');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  
-  const { user } = useAuthStore();
 
   if (!isOpen) return null;
 
@@ -31,8 +28,7 @@ export default function AddProductModal({ isOpen, onClose, onProductAdded }: Add
         name,
         description,
         quantity: parseInt(quantity),
-        price: parseFloat(price),
-        created_by: user?.id
+        price: parseFloat(price)
       });
 
       onProductAdded();
