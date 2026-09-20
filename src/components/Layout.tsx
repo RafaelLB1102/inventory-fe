@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuthStore } from '../store/authStore';
-import { LayoutDashboard, Package, LogOut } from 'lucide-react';
+import { LayoutDashboard, Package, ScanLine, History, LogOut } from 'lucide-react';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   const navigate = useNavigate();
@@ -14,8 +14,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   };
 
   const navigation = [
-    { name: 'Panel', href: '/', icon: LayoutDashboard },
+    // El enlace apuntaba a '/', que redirige a /dashboard pero nunca quedaba
+    // resaltado porque la ruta activa no coincidía.
+    { name: 'Panel', href: '/dashboard', icon: LayoutDashboard },
     { name: 'Productos', href: '/products', icon: Package },
+    { name: 'Clasificador', href: '/clasificador', icon: ScanLine },
+    { name: 'Historial', href: '/historial', icon: History },
   ];
 
   return (

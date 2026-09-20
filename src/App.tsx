@@ -7,6 +7,8 @@ import Dashboard from './pages/Dashboard';
 import Products from './pages/Products';
 import Layout from './components/Layout';
 import Landing from './pages/Landing';
+import Clasificador from './pages/Clasificador';
+import Historial from './pages/Historial';
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuthStore();
@@ -51,6 +53,26 @@ function App() {
             <PrivateRoute>
               <Layout>
                 <Products />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/clasificador"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <Clasificador />
+              </Layout>
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/historial"
+          element={
+            <PrivateRoute>
+              <Layout>
+                <Historial />
               </Layout>
             </PrivateRoute>
           }
